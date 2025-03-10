@@ -5,14 +5,14 @@ from streamlit_extras.app_logo import add_logo
 
 st.set_page_config(page_title="Formação", layout="wide")
 
-st.logo("crowdstrike.png")
+st.logo("images/crowdstrike.png")
 
 st.sidebar.markdown("Desenvolvido por Eduardo Mazelli ®️ 2025")
 col1, col2 = st.sidebar.columns([0.5, 0.5])
 col1.markdown("""<a href="https://github.com/GiantMazelliWasHere"><img src="https://cdn3.emoji.gg/emojis/6705-githubblack.png" width="64px" height="64px" alt="github"></a>""", unsafe_allow_html=True)
 col2.markdown("""<a href="https://www.linkedin.com/in/eduardo-mazelli/"><img src="https://cdn3.emoji.gg/emojis/70322-linkedin.png" width="64px" height="64px" alt="LinkedIn"></a>""""", unsafe_allow_html=True)
 
-st.image("formacao.png", width=150)
+st.image("images/formacao.png", width=150)
 st.title("Formação")
 
 st.header("Publicidade e Propaganda")

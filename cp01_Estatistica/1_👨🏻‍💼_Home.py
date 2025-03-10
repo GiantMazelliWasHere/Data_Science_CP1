@@ -5,7 +5,7 @@ from streamlit_extras.app_logo import add_logo
 
 st.set_page_config(page_title="Eduardo Mazelli", layout="wide")
 
-st.logo("crowdstrike.png")
+st.logo("images/crowdstrike.png")
 
 st.sidebar.markdown("Desenvolvido por Eduardo Mazelli ®️ 2025")
 
@@ -14,7 +14,7 @@ col1.markdown("""<a href="https://github.com/GiantMazelliWasHere"><img src="http
 col2.markdown("""<a href="https://www.linkedin.com/in/eduardo-mazelli/"><img src="https://cdn3.emoji.gg/emojis/70322-linkedin.png" width="64px" height="64px" alt="LinkedIn"></a>""""", unsafe_allow_html=True)
 
 col1, col2 = st.columns([0.25, 0.75])
-col1.image("perfil.png", width=150)
+col1.image("images/perfil.png", width=150)
 col2.title("Eduardo Mazelli")
 col2.write("+55 (11) 97649-4397")
 col2.write("eduardo.mazelli@gmail.com")
