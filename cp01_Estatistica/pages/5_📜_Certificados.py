@@ -15,6 +15,6 @@ col2.markdown("""<a href="https://www.linkedin.com/in/eduardo-mazelli/"><img src
 st.image("images/certificados.png", width=150)
 st.title("Certificados")
 
-df = pd.DataFrame(pd.read_csv("Certificados.csv"))
+df = pd.DataFrame(pd.read_csv("databases/Certificados.csv"))
 
 st.table(df)
