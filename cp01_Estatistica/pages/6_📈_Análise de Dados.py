@@ -83,17 +83,32 @@ st.markdown("#### Tabela de Ataques:")
 media_ataques = round(ataques["Quantidade de Ataques"].mean())
 median_ataques = round(ataques["Quantidade de Ataques"].median())
 moda_ataques = round(statistics.mode(ataques["Quantidade de Ataques"]))
+padrao_ataques = round(np.std(ataques["Quantidade de Ataques"]))
+variancia_ataques = round(np.var(ataques["Quantidade de Ataques"]))
 
 st.write("A média de ataques e explorações em 2024 foi de:", media_ataques)
 st.write("A mediana de ataques e explorações em 2024 foi de:", median_ataques)
 st.write("A moda de ataques e explorações em 2024 foi de:", moda_ataques)
+
+st.write(f"Podemos ver que a media e a mediana se encontram muito perto, com uma diferença de {media_ataques - median_ataques}. Ou seja, temos um meio e uma medida média muito alinhadas. Porem nossa moda se encontra muito fora d padrão, o que nos mostra que em maioria nossa data base deve ser formada de dados altos que se encontram fora do padrão da mediana.")
+
+st.write("Desvio padrão dos ataques:", padrao_ataques)
+st.write("A variância dos ataques:", variancia_ataques)
 
 st.markdown("#### Tabela de Campanhas de Vishing:")
 
 media_campanha = round(vishing["Quantidade de Campanhas"].mean())
 median_campanha = round(vishing["Quantidade de Campanhas"].median())
 moda_campanha = round(statistics.mode(vishing["Quantidade de Campanhas"]))
+padrao_campanha = round(np.std(vishing["Quantidade de Campanhas"]))
+variancia_campanha = round(np.var(vishing["Quantidade de Campanhas"]))
 
 st.write("A média de campanhas de Vishing em 2024 foi de:", media_campanha)
 st.write("A mediana de campanhas de Vishing em 2024 foi de:", median_campanha)
 st.write("A moda de campanhas de Vishing em 2024 foi de:", moda_campanha)
+
+st.write(f"Neste caso vemos uma diferença interessante com os nossos dados. Podemos ver que a mediana e a moda são os mesmos, o que mostra que nossa mediana está dentro da tendencia dos números que mais aparecem, e assim não deve ser um numero fora do padrão, devemos ter uma lista de números mais focados nesse padrão. Já média escapa desse número tendo uma diferença de {media_campanha - moda_campanha} com a moda e {media_campanha - median_campanha} com a mediana e isso pode nos informar que nossos dados possuem uma grande variedade de dados.")
+
+st.write("Desvio padrão das campanhas de Vishing:", padrao_campanha)
+st.write("Variância das campanhas de Vishing:", variancia_campanha)
+
