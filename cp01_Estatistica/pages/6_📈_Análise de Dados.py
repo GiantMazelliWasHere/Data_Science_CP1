@@ -61,7 +61,7 @@ if pages == "Ataques de Identidade e Explorações de Vulnerabilidades por Mês 
     st.write("2. Qual foi o mês com mais ataques e explorações em 2024?")
     st.write("3. Podemos usar essa média com uma dado que posso nos ajudar para futuras proteções?")
     
-    st.header("Análise inicial dos dados")
+    st.header("Gráficos de Medidas de Tendência Central")
     
     media_ataques = round(ataques["Quantidade de Ataques"].mean())
     median_ataques = round(ataques["Quantidade de Ataques"].median())
@@ -69,18 +69,26 @@ if pages == "Ataques de Identidade e Explorações de Vulnerabilidades por Mês 
     padrao_ataques = round(np.std(ataques["Quantidade de Ataques"]))
     variancia_ataques = variancia(media_ataques, ataques["Quantidade de Ataques"])
 
-    st.write("A média de ataques e explorações em 2024 foi de:", media_ataques)
-    st.write("A mediana de ataques e explorações em 2024 foi de:", median_ataques)
-    st.write("A moda de ataques e explorações em 2024 foi de:", moda_ataques)
-
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=ataques["Quantidade de Ataques"], mode='lines+markers', name='Quantidade de Ataques'))
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=[media_ataques]*len(ataques), mode='lines', name='Média', line=dict(dash='dash')))
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=[median_ataques]*len(ataques), mode='lines', name='Mediana', line=dict(dash='dot')))
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=[moda_ataques]*len(ataques), mode='lines', name='Moda', line=dict(dash='dashdot')))
+    fig.update_layout(title="Ataques de Identidade e Explorações de Vulnerabilidades - Média, Mediana e Moda", xaxis_title="Mês", yaxis_title="Quantidade de Ataques")
+    st.plotly_chart(fig)
+    
     st.write(f"Podemos ver que a media e a mediana se encontram muito perto, com uma diferença de {media_ataques - median_ataques}. Ou seja, temos um meio e uma medida média muito alinhadas. Porem nossa moda se encontra muito fora d padrão, o que nos mostra que em maioria nossa data base deve ser formada de dados altos que se encontram fora do padrão da mediana.")
 
-    st.write("Desvio padrão dos ataques:", padrao_ataques)
-    st.write("A variância dos ataques:", variancia_ataques)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=ataques["Quantidade de Ataques"], mode='lines+markers', name='Quantidade de Ataques'))
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=[padrao_ataques]*len(ataques), mode='lines', name='Desvio Padrão', line=dict(dash='dash')))
+    fig.add_trace(go.Scatter(x=ataques["Mês"], y=[variancia_ataques]*len(ataques), mode='lines', name='Variância', line=dict(dash='dot')))
+    fig.update_layout(title="Ataques de Identidade e Explorações de Vulnerabilidades - Desvio Padrão e Variância", xaxis_title="Mês", yaxis_title="Quantidade de Ataques")
+    st.plotly_chart(fig)
     
     st.write("Com esses dados adiquiridos podemos analisar que os dados do relátorio estão muito dispersos e espalhados em relação a média. O que nos mostra que a média não é um bom indicador para esses dados, pois ela não representa bem a tendência dos dados, já que eles alem de estarem dispersos do centro, estão també espalhados dele.")
     
-    st.header("Análise Gráfica")
+    st.header("Gráficos de Distribuição")
     st.subheader("Distribuição Normal:")
     
     media = media_ataques
@@ -112,7 +120,7 @@ elif pages == "Campanhas de Vishing":
     st.write("1. Qual é a tendência das campanhas de Vishing?")
     st.write("2. Quais meses podemos prever um maior número de vishing para nos protegermos mais?")
     
-    st.header("Análise inicial dos dados")
+    st.header("Gráficos de Medidas de Tendência Central")
     
     media_campanha = round(vishing["Quantidade de Campanhas"].mean())
     median_campanha = round(vishing["Quantidade de Campanhas"].median())
@@ -120,33 +128,36 @@ elif pages == "Campanhas de Vishing":
     padrao_campanha = round(np.std(vishing["Quantidade de Campanhas"]))
     variancia_campanha = round(variancia(media_campanha, vishing["Quantidade de Campanhas"]),2)
 
-    st.write("A média de campanhas de Vishing em 2024 foi de:", media_campanha)
-    st.write("A mediana de campanhas de Vishing em 2024 foi de:", median_campanha)
-    st.write("A moda de campanhas de Vishing em 2024 foi de:", moda_campanha)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=vishing["Quantidade de Campanhas"], mode='lines+markers', name='Quantidade de Campanhas'))
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=[media_campanha]*len(vishing), mode='lines', name='Média', line=dict(dash='dash')))
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=[median_campanha]*len(vishing), mode='lines', name='Mediana', line=dict(dash='dot')))
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=[moda_campanha]*len(vishing), mode='lines', name='Moda', line=dict(dash='dashdot')))
+    fig.update_layout(title="Campanhas de Vishing - Média, Mediana e Moda", xaxis_title="Mês", yaxis_title="Quantidade de Campanhas")
+    st.plotly_chart(fig)
 
     st.write(f"Neste caso vemos uma diferença interessante com os nossos dados. Podemos ver que a mediana e a moda são os mesmos, o que mostra que nossa mediana está dentro da tendencia dos números que mais aparecem, e assim não deve ser um numero fora do padrão, devemos ter uma lista de números mais focados nesse padrão. Já média escapa desse número tendo uma diferença de {media_campanha - moda_campanha} com a moda e {media_campanha - median_campanha} com a mediana e isso pode nos informar que nossos dados possuem uma grande variedade de dados.")
 
-    st.write("Desvio padrão das campanhas de Vishing:", padrao_campanha)
-    st.write("Variância das campanhas de Vishing:", variancia_campanha)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=vishing["Quantidade de Campanhas"], mode='lines+markers', name='Quantidade de Campanhas'))
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=[padrao_campanha]*len(vishing), mode='lines', name='Desvio Padrão', line=dict(dash='dash')))
+    fig.add_trace(go.Scatter(x=vishing["Mês"], y=[variancia_campanha]*len(vishing), mode='lines', name='Variância', line=dict(dash='dot')))
+    fig.update_layout(title="Campanhas de Vishing - Desvio Padrão e Variância", xaxis_title="Mês", yaxis_title="Quantidade de Campanhas")
+    st.plotly_chart(fig)
     
     st.write("Podemos analisar que os dados estão muito dispersos, porém pouco espalhados. Tronando a média um bom indicador para esses dados já que eles não dispersão do centro apenas se esplaham em volta dele.")
     
-    st.header("Análise Gráfica")
+    st.header("Gráficos de Distribuição")
     st.subheader("Distribuição Poisson:")
+    media_campanha = round(vishing["Quantidade de Campanhas"].mean())
+    x_max = st.number_input("Número de eventos desejado", min_value=0, step=1, value=12)
     
-    st.write("Taxa média de ocorrência (λ):", media_campanha)
-    x_max = st.number_input("Número de eventos desejado",min_value=0, step=1,value=12)
-    
-    x = np.arange(0, x_max)  
+    x = np.arange(0, x_max + 1)
     y = stats.poisson.pmf(x, media_campanha)
-    df_poisson = pd.DataFrame({"X": x, "P(X)": y, "P(X ≤ k) (Acumulado)": np.cumsum(y),
-                               "P(X > k) (Acumulado Cauda Direita)": 1-np.cumsum(y)}).set_index("X")
     
-    tabela = st.checkbox("Tabela de probabilidades")
-    if tabela:
-        st.write("Tabela de probabilidades:")
-        st.write(df_poisson)
-    plot_distribution(x, y, "Distribuição de Poisson", "Número de eventos", "Probabilidade")
+    fig = go.Figure(data=[go.Bar(x=x, y=y)])
+    fig.update_layout(title="Distribuição de Poisson", xaxis_title="Número de eventos", yaxis_title="Probabilidade")
+    st.plotly_chart(fig)
     
     st.write("Usamos uma distribuição de Poisson pois se tratar de um evento mais fechado, se tratando de um tipo específico de ataque.")
     st.write("Podemos ver que a probabilidade de termos 0 campanhas de Vishing é de 0.0001, o que nos mostra que é muito improvável que não tenhamos nenhuma campanha de Vishing em um mês. Porém ela se regulariza em torno de 24, 25 ou seja é provavel que tenhamos em torno de 25 campanhas de Vishing em um mês.")
@@ -167,7 +178,7 @@ elif pages == "Relatório de Proteção do ITU":
     st.write("3. Qual é a porcentagem de países que não possuem proteção?")
     st.write("4. Na questão turística, quais países devemos tomar cuidado ao usar a tecnologia por não possuir nenhuma proteção?")
     
-    st.header("Análise Gráfica")
+    st.header("Gráficos de Distribuição")
     st.subheader("Distribuição Binomial:")
     
     n = len(ict)
@@ -207,7 +218,7 @@ elif pages == "Relatório de Legislação do ITU":
     st.write("2. Qual é a porcentagem de países que possuem legislação ou regulamentação?")
     st.write("3. Qual é a porcentagem de países que não possuem legislação ou regulamentação?")
     
-    st.header("Análise Gráfica")
+    st.header("Gráficos de Distribuição")
     st.subheader("Distribuição Binomial:")
     
     n = len(leis)
